@@ -7,8 +7,20 @@ from app import app
 @app.route('/index')
 def index():
     # Let's mock some turnstyle data. This will later come from a SQL database
-    turnstile = {'id': '1', 
+    # the following will be the username of the station worker
+    user = {'username': 'tester'}
+    turnstiles = [
+        {
+            'id': '1', 
             'group': '2',
             'turn_count': '5',
-            'turn_rate': '0.5'}
-    return render_template('index.html', title='Home', row=turnstile)
+            'turn_rate': '0.5'
+        },
+        {
+            'id': '2', 
+            'group': '2',
+            'turn_count': '7',
+            'turn_rate': '1'
+        }
+    ]
+    return render_template('index.html', title='Home', user=user, turnstiles=turnstiles)

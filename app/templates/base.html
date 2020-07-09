@@ -1,0 +1,16 @@
+<html lang="en">
+    <head>
+        {% if title %}
+        <title>{{ title }} - MTA Dashboard</title>
+        {% endif %}
+    </head>
+    <body>
+        <!-- We'll use a routing directive here similar to what angular has
+            This part will describe a nav bar that we'll decorate later -->
+        <div>
+            MTA Dashboard <a href="/index">Home</a>
+        </div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

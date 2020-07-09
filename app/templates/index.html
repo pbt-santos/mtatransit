@@ -1,9 +1,12 @@
-<html lang="en">
-    <head>
-        {% if title %}
-        <title>{{ title }} - MTA Dashboard</title>
-    </head>
-    <body>
-        <h1>Turnstile with ID {{ row.id }}</h1>
-    </body>
-</html>
+{% extends "base.html" %}
+
+<!-- This block will be inserted into the base html page (note: block identifier is 'content')-->
+{% block content %}
+    <h1>User: {{ user.username }}</h1>
+    <!-- Let's display the turnstiles that we're monitoring 
+    Let's use the looping directive that jinja gives us-->
+        {% for turnstile in turnstiles %}
+        <div><p>{{ turnstile.id }} {{turnstile.group}} {{turnstile.turn_count}} {{turnstile.turn_rate}}</p></div>
+
+    {% endfor %}
+{% endblock %}
