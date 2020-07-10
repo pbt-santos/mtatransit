@@ -1,0 +1,29 @@
+<!-- Have the same top section -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sign In</h1>
+<!-- The login view function will send the form class to this -->
+<!-- novalidate option leaves validation for flask rather than browser-->
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+    {{ form.username.label }}<br>
+    <!-- Can also add CSS classes and IDs in the way size is added -->
+    {{ form.username(size=32) }}
+    <!-- Let's add some errors. Validators have errors -->
+    {% for error in form.username.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    </p>
+    <p>
+    {{ form.password.label }}<br>
+    {{ form.password(size=32) }}
+    {% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    </p>
+    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

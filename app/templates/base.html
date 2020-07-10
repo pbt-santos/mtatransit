@@ -8,9 +8,21 @@
         <!-- We'll use a routing directive here similar to what angular has
             This part will describe a nav bar that we'll decorate later -->
         <div>
-            MTA Dashboard <a href="/index">Home</a>
+            MTA Dashboard 
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
         </div>
         <hr>
+        <!-- Let's add a section to display the messages we save with flash() -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>
