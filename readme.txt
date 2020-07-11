@@ -19,3 +19,5 @@ We will use a SQL database (currently modelled with SQLite for prototyping) but 
 ### Notes
 There was some debate on whether to try and make this using angular, but we all
 had more experience using Python.
+There is a migration database file provided by flask-migrate that we can use 
+to adapt our db at a later time.

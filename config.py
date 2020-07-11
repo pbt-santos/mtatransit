@@ -12,7 +12,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'myKey'
 
     # Database (from environ or app.db file)
-    SQLALCHEMY_DB_URI = os.environ.get('DB_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     # Don't signal the database when about to make modifications
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

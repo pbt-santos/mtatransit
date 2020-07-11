@@ -16,6 +16,20 @@ class User(db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+
+# Class of the various groups in the station (an aggregate)
+class TurnstileGroup(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    group_id = db.Column(db.String(64), nullable=False, index=True, unique=True)
+    location = db.Column(db.String(50), nullable=False, unique=True)
+    total_count = db.Column(db.Integer)
+    total_rate = db.Column(db.Integer)
+    turnstiles = db.relationship('Turnstile', backref='group', lazy='dynamic')
+
+    def __repr__(self):
+        return '<TurnstileGroup {}>'.format(group_id)
+
+
 # Turnstile of Times square station 
 class Turnstile(db.Model):
     # Cols: id, turnstile_id, group_id, turn_count, turn_rate (need anything else?)
@@ -23,9 +37,9 @@ class Turnstile(db.Model):
     # Have turnstile_id as our main id and group_id just show location and other data?
     id = db.Column(db.Integer, primary_key=True)
     turnstile_id = db.Column(db.String(64), nullable=False, index=True, unique=True)
-    group_id = db.Column(db.String(64), nullable=False, index=True)
     turn_count = db.Column(db.Integer)
     turn_rate = db.Column(db.Float)
+    group_id = db.Column(db.String(64), db.ForeignKey('turnstile_group.group_id'))
 
     def __repr__(self):
         return '<Turnstile {}, group {} has turn rate {}>'.format(self.turnstile_id, self.group_id, self.turn_rate)
