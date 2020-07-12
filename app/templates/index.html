@@ -5,8 +5,23 @@
     <h1>User: {{ current_user.username }}</h1>
     <!-- Let's display the turnstiles that we're monitoring 
     Let's use the looping directive that jinja gives us-->
+    <table class="turnstiles">
+        <th>
+            <tr>
+                <td>Id</td>
+                <td>Group Id</td>
+                <td>Turn Count</td>
+                <td>Turn Rate</td>
+            </tr>
+        </th>
         {% for turnstile in turnstiles %}
-        <div><p>{{ turnstile.id }} {{turnstile.group}} {{turnstile.turn_count}} {{turnstile.turn_rate}}</p></div>
-
-    {% endfor %}
+        <tr>
+            <td>{{ turnstile.turnstile_id }}</td>
+            <td>{{ turnstile.group_id}}</td>
+            <td>{{ turnstile.turn_count }}</td>
+            <td>{{ turnstile.turn_rate }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <!-- Need to add a request for service form/button here -->
 {% endblock %}
