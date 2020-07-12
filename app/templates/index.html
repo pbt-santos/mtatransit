@@ -2,7 +2,7 @@
 
 <!-- This block will be inserted into the base html page (note: block identifier is 'content')-->
 {% block content %}
-    <h1>User: {{ user.username }}</h1>
+    <h1>User: {{ current_user.username }}</h1>
     <!-- Let's display the turnstiles that we're monitoring 
     Let's use the looping directive that jinja gives us-->
         {% for turnstile in turnstiles %}

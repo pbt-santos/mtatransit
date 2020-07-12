@@ -21,3 +21,6 @@ There was some debate on whether to try and make this using angular, but we all
 had more experience using Python.
 There is a migration database file provided by flask-migrate that we can use 
 to adapt our db at a later time.
+
+There was no profile page used though this could be changed in case MTA wants it eg: to track which turnstiles they fixed
+Not adopted from Miguel: (profile pages, avatars)

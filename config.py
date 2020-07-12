@@ -16,3 +16,10 @@ class Config(object):
     # Don't signal the database when about to make modifications
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Add some notifications in case errors occur
+    MAIL_SERVER = os.environ.get('MAIL_SERVER')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    ADMINS = ['mtaadmin@mta.gov'] # this is just an example
