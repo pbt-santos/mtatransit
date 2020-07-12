@@ -1,10 +1,18 @@
 ''' This file will be used to define our database models:
     Users and Turnstiles (users optional for later)'''
 
-from app import db
+from app import db, login
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+
+# setup login by telling it how to get stuff from db
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
 
 # Users of dashboard (more for following along with tutorial)
-class User(db.Model):
+class User(UserMixin, db.Model):
     # Cols: id, username, email, passhash (security)
     # Type+length, indexed (searching), unique
     id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +23,13 @@ class User(db.Model):
     # essentially toString overloading
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    # Add some password security
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+        
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 # Class of the various groups in the station (an aggregate)
@@ -27,7 +42,7 @@ class TurnstileGroup(db.Model):
     turnstiles = db.relationship('Turnstile', backref='group', lazy='dynamic')
 
     def __repr__(self):
-        return '<TurnstileGroup {}>'.format(group_id)
+        return '<TurnstileGroup {}>'.format(self.group_id)
 
 
 # Turnstile of Times square station 
