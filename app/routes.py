@@ -6,6 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
 
+import json
 
 # let's create a provisional before request section
 # @app.before_request
@@ -22,14 +23,14 @@ def index():
     # the following will be the username of the station worker
     turnstiles = [
         {
-            'id': '1', 
-            'group': '2',
+            'turnstile_id': '1', 
+            'group_id': '2',
             'turn_count': '5',
             'turn_rate': '0.5'
         },
         {
-            'id': '2', 
-            'group': '2',
+            'turnstile_id': '2', 
+            'group_id': '2',
             'turn_count': '7',
             'turn_rate': '1'
         }
@@ -72,6 +73,26 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+# route to get the table data every 5 seconds. Would need to add security in a real application
+@app.route('/data', methods=['GET'])
+def get_data():
+    # we will later get this data from pandas
+    turnstiles = [
+        {
+            'turnstile_id': '1', 
+            'group_id': '2',
+            'turn_count': '5',
+            'turn_rate': '0.5'
+        },
+        {
+            'turnstile_id': '2', 
+            'group_id': '2',
+            'turn_count': '7',
+            'turn_rate': '1'
+        }
+    ]
+    return json.dumps(turnstiles)
 
 # Registration page for new users
 @app.route("/register", methods=['GET', 'POST'])

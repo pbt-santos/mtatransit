@@ -15,6 +15,7 @@ flask-migrate = "*"
 flask-login = "*"
 email-validator = "*"
 flask-table = "*"
+flask-bootstrap = "*"
 
 [requires]
 python_version = "3.7"

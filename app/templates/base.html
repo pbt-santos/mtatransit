@@ -1,32 +1,46 @@
-<html lang="en">
-    <head>
-        {% if title %}
-        <title>{{ title }} - MTA Dashboard</title>
-        {% endif %}
-    </head>
-    <body>
-        <!-- We'll use a routing directive here similar to what angular has
-            This part will describe a nav bar that we'll decorate later -->
-        <div>
-            MTA Dashboard 
-            <a href="{{ url_for('index') }}">Home</a>
-            {% if current_user.is_anonymous %}
-            <a href="{{ url_for('login') }}">Login</a>
-            {% else %}
-            <a href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    MTA - Dashboard
+{% endblock %}
+{% block head %}
+{{super()}}
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='mta-logo.png') }}">
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-inverse static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='mta-logo.png') }}" alt="Logo" width="45" height="45" class="d-inline-block mr-2" style="margin-top:0px;float:left;">
+            </a>
         </div>
-        <hr>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_anonymous %}
+                <li><a href="{ url_for('login') }">Login</a></li>
+                {% else %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
         <!-- Let's add a section to display the messages we save with flash() -->
+{% block content %}
+    <div class="container">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+            <div class="alert alert-info" role="alert">{{ message }}</div>
             {% endfor %}
-        </ul>
         {% endif %}
         {% endwith %}
-        {% block content %}{% endblock %}
-    </body>
-</html>
+
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}

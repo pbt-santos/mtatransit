@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask, request, current_app
 from config import Config
 
 # Flask extension wrappers
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate 
 from flask_login import LoginManager
+from flask_bootstrap import Bootstrap
 
 # Logging 
 import logging
@@ -12,17 +13,20 @@ import logging
 from logging.handlers import RotatingFileHandler
 import os
 
-# Create app and use route module
-app = Flask(__name__)
-app.config.from_object(Config)
-
 # DB instance
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
+bootstrap = Bootstrap(app)
 
 # tell the app that the login page will handle view protection
 login.login_view = 'login'
+
+
+def create_app(config_class=Config):
+# Create app and use route module
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
 
 # log out to a file 10KB, showing timestamp alert level file loc
