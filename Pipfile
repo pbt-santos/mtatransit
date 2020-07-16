@@ -17,6 +17,7 @@ email-validator = "*"
 flask-table = "*"
 flask-bootstrap = "*"
 python-dotenv = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.7"
