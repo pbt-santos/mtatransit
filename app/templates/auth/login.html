@@ -6,7 +6,7 @@
 <h1>Sign In</h1>
 <!-- The login view function will send the form class to this -->
 <!-- novalidate option leaves validation for flask rather than browser-->
-<p>New Users: <a href="{{ url_for('register') }}">Register</a></p>
+<p>New Users: <a href="{{ url_for('auth.register') }}">Register</a></p>
 <div class="row">
     <div class="col-md-4">
         {{ wtf.quick_form(form) }}

@@ -4,6 +4,7 @@
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from flask import current_app
 
 # setup login by telling it how to get stuff from db
 @login.user_loader

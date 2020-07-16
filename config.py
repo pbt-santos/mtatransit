@@ -2,8 +2,12 @@
 # We'll be using flask forms to authenticate our dashboard users (optional functionality display)
 import os
 
+# To get our environment variables automatically set
+from dotenv import load_dotenv
+
 # Fallback location of database in app main dir
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
 # we're going to use this rather than app.config so that it is separate
 class Config(object):
