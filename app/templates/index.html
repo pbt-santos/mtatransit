@@ -17,7 +17,7 @@
                 for (var i in dataObject) {
                     var row = dataObject[i];
 
-                    var rowText = "<tr><td>" + row.turnstile_id + "</td><td>" + row.group_id + "</td><td>" + row.turn_count + "</td><td>" + row.turn_rate + "</td></tr>";
+                    var rowText = "<tr><td>" + row.turnstile_id + "</td><td>" + row.net_entry + "</td><td>" + row.net_exit + "</td></tr>";
                     tableHtml += rowText;
                 }
                 $("#main_table").html(tableHtml);
@@ -39,9 +39,9 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Group Id</th>
-                    <th>Turn Count</th>
-                    <th>Turn Rate</th>
+                    <th>Net Entry</th>
+                    <th>Net Exit</th>
+                    <!--<th>Turn Rate</th>-->
                 </tr>
             </thead>
             <tbody id="main_table">
@@ -49,9 +49,8 @@
             <!-- can have class="danger" to turn red using bootstrap -->
             <tr>
                 <td>{{ turnstile.turnstile_id }}</td>
-                <td>{{ turnstile.group_id}}</td>
-                <td>{{ turnstile.turn_count }}</td>
-                <td class="watch_metric">{{ turnstile.turn_rate }}</td>
+                <td>{{ turnstile.net_entry}}</td>
+                <td>{{ turnstile.net_exit }}</td>
             </tr>
             {% endfor %}
             </tbody>

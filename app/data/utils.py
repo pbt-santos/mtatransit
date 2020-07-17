@@ -10,7 +10,7 @@ class TurnstileExtractor(object):
 
 
     def __init__(self, table_file):
-        self.table = pd.read_excel(table_file)
+        self.table = pd.read_csv(table_file)
         self.__times_retrieved = 0
 
 
@@ -20,8 +20,8 @@ class TurnstileExtractor(object):
         df = self.table
         # DB in this case will be formatted so that we have the times starting at 0
         # and going up in minute increment
-        mask = df['time'] == self.__times_retrieved
-        df = df.loc[mask]
+        mask = df['retrieve_time'] == self.__times_retrieved
+        df = df[mask]
         
         # let's drop the unnecessary columns and get our df with columns turnstile_id, group_id, turn_count, tunr_rate
         df = self._post_process(df)
@@ -32,7 +32,5 @@ class TurnstileExtractor(object):
 
     # method that formats into the table format html expects
     def _post_process(self, df):
-        df.drop(['time'])
-
-        # get the count rates correct
+        return df.drop(columns=['Unit', 'SCP', 'retrieve_time'])
 

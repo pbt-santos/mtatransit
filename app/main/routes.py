@@ -5,11 +5,14 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Turnstile, TurnstileGroup
 from app.main import bp
 import json
+from app.data.utils import TurnstileExtractor
 
 # let's create a provisional before request section
 # @app.before_request
 # def before_request():
 #     pass
+
+extractor = TurnstileExtractor("./app/data/turnstile_data.csv")
 
 
 # Show this whenever we hit these two endpoints but make people login
@@ -17,20 +20,19 @@ import json
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    # Let's mock some turnstyle data. This will later come from a SQL database
-    # the following will be the username of the station worker
+    # mock data before first upload
     turnstiles = [
         {
             'turnstile_id': '1', 
-            'group_id': '2',
-            'turn_count': '5',
-            'turn_rate': '0.5'
+            'net_entry': '2',
+            'net_exit': '5'
+            #'turn_rate': '0.5'
         },
         {
             'turnstile_id': '2', 
-            'group_id': '2',
-            'turn_count': '7',
-            'turn_rate': '1'
+            'net_entry': '2',
+            'net_exit': '7'
+            #'turn_rate': '1'
         }
     ]
     return render_template('index.html', title='Home', turnstiles=turnstiles)
@@ -40,18 +42,20 @@ def index():
 @bp.route('/data', methods=['GET'])
 def get_data():
     # we will later get this data from pandas
-    turnstiles = [
-        {
-            'turnstile_id': '1', 
-            'group_id': '2',
-            'turn_count': '5',
-            'turn_rate': '0.5'
-        },
-        {
-            'turnstile_id': '2', 
-            'group_id': '2',
-            'turn_count': '7',
-            'turn_rate': '1'
-        }
-    ]
-    return json.dumps(turnstiles)
+    #turnstiles = [
+    #    {
+    #        'turnstile_id': '1', 
+    #        'net_entry': '2',
+    #        'net_exit': '5'
+    #        #'turn_rate': '0.5'
+    #    },
+    #    {
+    #        'turnstile_id': '2', 
+    #        'net_entry': '2',
+    #        'net_exit': '7'
+    #        #'turn_rate': '1'
+    #    }
+    #]
+    #return json.dumps(turnstiles)
+    jsonRet = extractor.retrieve_next_minute()
+    return jsonRet
