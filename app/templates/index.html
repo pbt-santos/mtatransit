@@ -17,7 +17,7 @@
                 for (var i in dataObject) {
                     var row = dataObject[i];
 
-                    var rowText = "<tr><td>" + row.turnstile_id + "</td><td>" + row.net_entry + "</td><td>" + row.net_exit + "</td></tr>";
+                    var rowText = "<tr><td>" + row.turnstile_id + "</td><td>" + row.net_entry + "</td><td>" + row.net_exit + "</td><td><button type='button' class='btn btn-danger'>Alert</button></td></tr>";
                     tableHtml += rowText;
                 }
                 $("#main_table").html(tableHtml);
@@ -27,6 +27,25 @@
             });
         // Now set how often
     }, 1000 * 5);
+    
+    // Now we'll bind an alert function to the button
+$(document).ready(function () {
+    $("button").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/alert",
+            //data: { },
+            success: function(result) {
+                console.log('ok');
+            },
+            error: function(result) {
+                console.log('failed alert');
+            }
+        });
+    });
+});
+
 </script>
 {% endblock %}
 {% block app_content %}
@@ -41,6 +60,7 @@
                     <th>Id</th>
                     <th>Net Entry</th>
                     <th>Net Exit</th>
+                    <th>Action</th>
                     <!--<th>Turn Rate</th>-->
                 </tr>
             </thead>

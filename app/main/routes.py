@@ -59,3 +59,8 @@ def get_data():
     #return json.dumps(turnstiles)
     jsonRet = extractor.retrieve_next_minute()
     return jsonRet
+
+# route to display an alert about turnstile
+@bp.route('/alert', methods=['POST'])
+def alert_turnstile():
+    flash('Worker dispatched to check turnstile', 'error')
