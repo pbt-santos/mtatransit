@@ -23,7 +23,7 @@ class TurnstileExtractor(object):
         mask = df['retrieve_time'] == self.__times_retrieved
         df = df[mask]
         
-        # let's drop the unnecessary columns and get our df with columns turnstile_id, group_id, turn_count, tunr_rate
+        # let's drop the unnecessary columns and get our df with columns turnstile_id, group_id, turn_count, turn_rate
         df = self._post_process(df)
 
         self.__times_retrieved += 1
