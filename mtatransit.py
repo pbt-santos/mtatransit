@@ -8,4 +8,4 @@ app = create_app()
 # let's configure stuff to work with flask shell when testing db
 @app.shell_context_processor
 def make_shell_context():
-    return {'db': db, 'User': User, 'Turnstile': Turnstile, 'TurnstileGroup': TurnstileGroup }
+    return {'db': db, 'User': User, 'Turnstile': Turnstile, 'TurnstileGroup': TurnstileGroup}
