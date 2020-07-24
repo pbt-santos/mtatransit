@@ -49,7 +49,7 @@ class TurnstileGroup(db.Model):
 # Turnstile of Times square station 
 class Turnstile(db.Model):
     # Cols: id, turnstile_id, group_id, turn_count, turn_rate (need anything else?)
-    # May want to re-structure this later to have foreign keys fo r turnstile_id or group_id
+    # May want to re-structure this later to have foreign keys for turnstile_id or group_id
     # Have turnstile_id as our main id and group_id just show location and other data?
     id = db.Column(db.Integer, primary_key=True)
     turnstile_id = db.Column(db.String(64), nullable=False, index=True, unique=True)
