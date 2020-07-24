@@ -1,3 +1,16 @@
+# Usage
+Unix Bash (Linux, Mac, etc.):
+$ export FLASK_APP=mtatransit.py
+$ flask run
+
+Windows CMD:
+> set FLASK_APP=mtatransit.py
+> flask run
+
+Windows Powershell:
+> $env:FLASK_APP=mtatransit.py
+> flask run
+
 # Goals:
 
 The work in this repository was designed as an app prototype for 
