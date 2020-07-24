@@ -15,7 +15,7 @@ class TurnstileExtractor(object):
 
 
     # get the simulated next minute of data (would be db later)
-    def  retrieve_next_minute(self):
+    def retrieve_next_minute(self):
         # need to get the data into a json object array
         df = self.table
         # DB in this case will be formatted so that we have the times starting at 0
