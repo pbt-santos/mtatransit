@@ -8,15 +8,12 @@ def grouped_time_based_sort(grouped_data, mode):
     # sort grouped data according to mode
     if mode == 0:  # mode = 0: total volume of movement
         sorted_grouped_data = sorted(grouped_data, key=lambda entry: sum(map(int, entry[4:6])), reverse=True)
-        print("3 highest traffic turnstile groups:", sorted_grouped_data[:3])
         f = open("grpd+srtd_ttl_vol_data.csv", "w", newline="")
     elif mode == 1:  # mode = 1: total entries
         sorted_grouped_data = sorted(grouped_data, key=lambda entry: int(entry[4]), reverse=True)
-        print("3 most entered turnstile groups:", sorted_grouped_data[:3])
         f = open("grpd+srtd_entry_data.csv", "w", newline="")
     elif mode == 2:  # mode = 2: total exits
         sorted_grouped_data = sorted(grouped_data, key=lambda entry: int(entry[5]), reverse=True)
-        print("3 most exited turnstile groups:", sorted_grouped_data[:3])
         f = open("grpd+srtd_exit_data.csv", "w", newline="")
     else:
         return None
@@ -91,7 +88,6 @@ if __name__ == "__main__":
         else:
             g_id_to_e_e[row_g_id] = [int(row[9]), int(row[10]), 1]
     grouped_data = [list(key) + g_id_to_e_e[key] for key in g_id_to_e_e.keys()]
-    print(grouped_data[:5])
 
     # sort grouped data by highest volume of movement, entries and exits over the entire year, and write results to csv files
     grouped_time_based_sort(grouped_data, 0)
