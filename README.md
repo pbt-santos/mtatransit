@@ -1,15 +1,21 @@
 # Usage
 Unix Bash (Linux, Mac, etc.):
+```#!/bin/bash
 $ export FLASK_APP=mtatransit.py
 $ flask run
+```
 
 Windows CMD:
+```console
 > set FLASK_APP=mtatransit.py
 > flask run
+```
 
 Windows Powershell:
+```console
 > $env:FLASK_APP=mtatransit.py
 > flask run
+```
 
 # Goals:
 
