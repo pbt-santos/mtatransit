@@ -3,6 +3,7 @@
 Requirements:
 - Need data.csv files present in the app/data/data_wrangling subdirectory. The columns should have Id, net_entry and net_exit names. Feel free to use the helper .py wrangling files in that directory, or your own wrangling methodology.
 - Python package management: pip install pipenv followed by pipenv install in the project directory. Pipenv shell to activate the environment.
+- Add a user to the database
 
 Unix Bash (Linux, Mac, etc.):
 ```#!/bin/bash
